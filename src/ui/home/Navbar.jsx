@@ -4,9 +4,9 @@ import { useState, useEffect } from "react";
    CONFIGURABLE CONTENT
    ================================================== */
 const navLinks = [
-  { label: "Home", href: "#home", id: "home" },
-  { label: "About", href: "#about", id: "about" },
-  { label: "Contact", href: "#contact", id: "contact" },
+  { label: "Home", href: "/home", id: "home" },
+  { label: "About", href: "/about", id: "about" },
+  { label: "Contact", href: "/contact", id: "contact" },
 ];
 
 const ACCENT = "#00adee";

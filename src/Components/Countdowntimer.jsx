@@ -5,7 +5,7 @@ import { useState, useEffect, useMemo } from "react";
    ================================================== */
 const countdownConfig = {
   // Set your registration deadline here (local time)
-  targetDate: "2027-08-13T09:00:00",
+  targetDate: "2026-10-02T00:00:00",
   heading: "Registration Closes In",
   subtitle: "Register early — the first 500 squads get exclusive drip.",
   note: "Don't miss your shot. Once the clock hits zero, registration for Esports Carnival 2026 locks — secure your squad's spot with Last Night Scholars (LNS) before it's gone.",
