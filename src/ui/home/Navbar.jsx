@@ -1,12 +1,14 @@
 import { useState, useEffect } from "react";
+import { Link, NavLink } from "react-router";
 
 /* ==================================================
    CONFIGURABLE CONTENT
    ================================================== */
 const navLinks = [
-  { label: "Home", href: "/home", id: "home" },
-  { label: "About", href: "/about", id: "about" },
-  { label: "Contact", href: "/contact", id: "contact" },
+  { label: "Home", to: "/", end: true },
+  { label: "Esports", to: "/esports", end: false },
+  { label: "About", to: "/about", end: false },
+  { label: "Contact", to: "/contact", end: false },
 ];
 
 const ACCENT = "#00adee";
@@ -14,7 +16,6 @@ const ACCENT = "#00adee";
 export default function Navbar() {
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
-  const [active, setActive] = useState("home");
   const [logoOk, setLogoOk] = useState(true);
 
   useEffect(() => {
@@ -24,38 +25,14 @@ export default function Navbar() {
       "https://fonts.googleapis.com/css2?family=Orbitron:wght@600;700&family=Space+Grotesk:wght@400;500;600&display=swap";
     document.head.appendChild(link);
 
-    const prevScrollBehavior = document.documentElement.style.scrollBehavior;
-    document.documentElement.style.scrollBehavior = "smooth";
-
     const onScroll = () => setScrolled(window.scrollY > 12);
     window.addEventListener("scroll", onScroll, { passive: true });
     onScroll();
 
     return () => {
       document.head.removeChild(link);
-      document.documentElement.style.scrollBehavior = prevScrollBehavior;
       window.removeEventListener("scroll", onScroll);
     };
-  }, []);
-
-  // Highlight the link for whichever section is currently in view
-  useEffect(() => {
-    const sections = navLinks
-      .map((l) => document.getElementById(l.id))
-      .filter(Boolean);
-    if (sections.length === 0) return;
-
-    const observer = new IntersectionObserver(
-      (entries) => {
-        const visible = entries
-          .filter((e) => e.isIntersecting)
-          .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
-        if (visible) setActive(visible.target.id);
-      },
-      { rootMargin: "-40% 0px -50% 0px", threshold: [0, 0.25, 0.5, 0.75, 1] },
-    );
-    sections.forEach((s) => observer.observe(s));
-    return () => observer.disconnect();
   }, []);
 
   // Lock body scroll while the mobile menu is open
@@ -81,9 +58,9 @@ export default function Navbar() {
           boxShadow: scrolled ? "0 8px 30px rgba(0,0,0,0.35)" : "none",
         }}
       >
-        {/* Logo */}
-        <a
-          href="#home"
+        {/* Logo — always returns to the home route */}
+        <Link
+          to="/"
           className="flex items-center gap-3 shrink-0 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 rounded-sm"
           style={{ outlineColor: ACCENT }}
         >
@@ -112,47 +89,48 @@ export default function Navbar() {
             className="hidden sm:block text-sm md:text-base font-bold tracking-wide text-[#eaf6ff]"
             style={{ fontFamily: "'Orbitron', sans-serif" }}
           >
-            ESPORTS<span style={{ color: ACCENT }}>CARNIVAL</span>
+            Last Night Scholars - JnU
           </span>
-        </a>
+        </Link>
 
         {/* Desktop links */}
         <ul
           className="hidden md:flex items-center gap-10 absolute left-1/2 -translate-x-1/2"
           style={{ fontFamily: "'Space Grotesk', sans-serif" }}
         >
-          {navLinks.map((link) => {
-            const isActive = active === link.id;
-            return (
-              <li key={link.label}>
-                <a
-                  href={link.href}
-                  aria-current={isActive ? "page" : undefined}
-                  className="group relative text-sm font-medium transition-colors duration-200 hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 rounded-sm"
-                  style={{
-                    color: isActive ? "#ffffff" : "#cfeaf6",
-                    outlineColor: ACCENT,
-                  }}
-                >
-                  {link.label}
-                  <span
-                    className={`absolute -bottom-1.5 left-0 h-[2px] transition-all duration-300 ${
-                      isActive ? "w-full" : "w-0 group-hover:w-full"
-                    }`}
-                    style={{
-                      background: ACCENT,
-                      boxShadow: "0 0 8px rgba(0,173,238,0.8)",
-                    }}
-                  />
-                </a>
-              </li>
-            );
-          })}
+          {navLinks.map((link) => (
+            <li key={link.label}>
+              <NavLink
+                to={link.to}
+                end={link.end}
+                className="group relative text-sm font-medium transition-colors duration-200 hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 rounded-sm"
+                style={({ isActive }) => ({
+                  color: isActive ? "#ffffff" : "#cfeaf6",
+                  outlineColor: ACCENT,
+                })}
+              >
+                {({ isActive }) => (
+                  <>
+                    {link.label}
+                    <span
+                      className={`absolute -bottom-1.5 left-0 h-[2px] transition-all duration-300 ${
+                        isActive ? "w-full" : "w-0 group-hover:w-full"
+                      }`}
+                      style={{
+                        background: ACCENT,
+                        boxShadow: "0 0 8px rgba(0,173,238,0.8)",
+                      }}
+                    />
+                  </>
+                )}
+              </NavLink>
+            </li>
+          ))}
         </ul>
 
         {/* Desktop CTA */}
-        <a
-          href="#registration"
+        <Link
+          to="/esports"
           className="hidden md:inline-flex items-center px-6 py-2.5 rounded-md text-sm font-semibold text-[#02060A] transition-all duration-300 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2"
           style={{
             fontFamily: "'Space Grotesk', sans-serif",
@@ -170,7 +148,7 @@ export default function Navbar() {
           }}
         >
           Registration
-        </a>
+        </Link>
 
         {/* Mobile menu toggle */}
         <button
@@ -206,7 +184,7 @@ export default function Navbar() {
       <div
         className="md:hidden overflow-hidden transition-all duration-300 ease-out"
         style={{
-          maxHeight: open ? "360px" : "0px",
+          maxHeight: open ? "420px" : "0px",
           backgroundColor: "rgba(3,11,18,0.85)",
           backdropFilter: "blur(14px)",
           WebkitBackdropFilter: "blur(14px)",
@@ -219,20 +197,22 @@ export default function Navbar() {
         >
           {navLinks.map((link) => (
             <li key={link.label}>
-              <a
-                href={link.href}
+              <NavLink
+                to={link.to}
+                end={link.end}
                 onClick={() => setOpen(false)}
-                aria-current={active === link.id ? "page" : undefined}
                 className="text-base font-medium transition-colors"
-                style={{ color: active === link.id ? "#ffffff" : "#cfeaf6" }}
+                style={({ isActive }) => ({
+                  color: isActive ? "#ffffff" : "#cfeaf6",
+                })}
               >
                 {link.label}
-              </a>
+              </NavLink>
             </li>
           ))}
           <li>
-            <a
-              href="#registration"
+            <Link
+              to="/esports"
               onClick={() => setOpen(false)}
               className="inline-flex items-center px-8 py-3 rounded-md text-sm font-semibold text-[#02060A] transition-all duration-300"
               style={{
@@ -241,7 +221,7 @@ export default function Navbar() {
               }}
             >
               Registration
-            </a>
+            </Link>
           </li>
         </ul>
       </div>

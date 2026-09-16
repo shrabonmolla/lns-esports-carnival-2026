@@ -7,6 +7,7 @@ import HomeLayout from "../layoutes/HomeLayout";
 import Home from "../pages/Home";
 import About from "../pages/About.jsx";
 import Contact from "../pages/Contact";
+import Esports from "../pages/Esports.jsx";
 
 const router = createBrowserRouter([
   {
@@ -24,6 +25,10 @@ const router = createBrowserRouter([
       {
         path: "contact",
         element: <Contact />,
+      },
+      {
+        path: "/esports",
+        element: <Esports />,
       },
     ],
   },

@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState, useCallback } from "react";
-
+import { Link } from "react-router";
 /* ==================================================
    CONFIGURABLE CONTENT
    ================================================== */
@@ -324,7 +324,8 @@ function HeroContent({ mounted }) {
             style={stage(4)}
             className="mt-9 flex flex-col sm:flex-row items-center justify-center gap-4"
           >
-            <button
+            <Link
+              to="/esports"
               type="button"
               className="group relative w-full sm:w-auto px-8 py-3.5 rounded-md font-semibold text-sm tracking-wide text-[#02060A] transition-all duration-300 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2"
               style={{
@@ -346,9 +347,10 @@ function HeroContent({ mounted }) {
               }}
             >
               {eventInfo.primaryButton}
-            </button>
+            </Link>
 
-            <button
+            <Link
+              to="/esports"
               type="button"
               className="w-full sm:w-auto px-8 py-3.5 rounded-md font-semibold text-sm tracking-wide text-[#dff4ff] border transition-all duration-300 backdrop-blur-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2"
               style={{
@@ -367,7 +369,7 @@ function HeroContent({ mounted }) {
               }}
             >
               {eventInfo.secondaryButton}
-            </button>
+            </Link>
           </div>
         </div>
       </div>
