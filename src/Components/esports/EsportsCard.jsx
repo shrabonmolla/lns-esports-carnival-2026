@@ -2,8 +2,8 @@ const ACCENT = "#00adee";
 
 /**
  * A single futuristic glass-panel card for one esports game.
- * Renders the game identifier, a placeholder visual (initials),
- * info badges, description, status, and a register button.
+ * Renders the game logo/icon, info badges, description, status,
+ * and a register button.
  */
 export default function EsportsCard({ game, index }) {
   const isOpen = game.status === "Registration Open";
@@ -48,10 +48,10 @@ export default function EsportsCard({ game, index }) {
         </h3>
       </div>
 
-      {/* Visual placeholder */}
+      {/* Game image */}
       <div className="relative mb-6 flex items-center justify-center">
         <div
-          className="relative flex h-28 w-28 items-center justify-center rounded-full transition-transform duration-300 ease-out group-hover:scale-105 sm:h-32 sm:w-32"
+          className="relative flex h-28 w-28 items-center justify-center overflow-hidden rounded-full transition-transform duration-300 ease-out group-hover:scale-105 sm:h-32 sm:w-32"
           style={{
             background:
               "radial-gradient(circle at 35% 30%, rgba(0,173,238,0.20), rgba(6,19,28,0.4) 70%)",
@@ -80,15 +80,12 @@ export default function EsportsCard({ game, index }) {
               borderBottomStyle: "solid",
             }}
           />
-          <span
-            className="text-xl font-bold tracking-wide text-white sm:text-2xl"
-            style={{
-              fontFamily: "'Orbitron', sans-serif",
-              textShadow: `0 0 18px ${ACCENT}80`,
-            }}
-          >
-            {game.shortName}
-          </span>
+          <img
+            src={game.image}
+            alt={`${game.name} icon`}
+            className="h-full w-full rounded-full object-contain p-3"
+            loading="lazy"
+          />
         </div>
       </div>
 

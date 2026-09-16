@@ -6,13 +6,14 @@ const ACCENT = "#00adee";
 
 // Replace this array with real data from your backend later.
 // Keep the shape the same and EsportsCard will keep working as-is.
+// - image: URL to a square/round logo or icon for the game (dummy for now)
 // - entryFee: shown as plain text on the card, e.g. "Free" or "৳500 / team"
 // - formLink: the Google Form URL the REGISTER NOW button opens (new tab)
 const esportsGames = [
   {
     id: 1,
     name: "VALORANT",
-    shortName: "VAL",
+    image: "https://i.ibb.co.com/gLNJjnR6/Valorant-Logo-PNG-Cutout.png",
     description:
       "Register your team for the Valorant 5v5 tournament at JnU Esports Carnival 2026.",
     category: "PC",
@@ -26,13 +27,13 @@ const esportsGames = [
   {
     id: 2,
     name: "PUBG MOBILE",
-    shortName: "PUBG",
+    image: "https://i.ibb.co.com/Xrvv1Hkv/pubg-mobile-seeklogo.png",
     description:
       "Showcase your strategy, teamwork, and combat skills as you fight your way to the top.",
     category: "Mobile",
     mode: "Squad",
     status: "Registration Open",
-    entryFee: "৳150 / member",
+    entryFee: "৳500 / team",
     formLink:
       "https://docs.google.com/forms/d/e/1FAIpQLSdCaMJHSIWUtzHnrk83Z6iS-zUWpsNFZ99I7vPqNokKOO4XqA/viewform?usp=dialog",
   },
@@ -40,20 +41,20 @@ const esportsGames = [
   {
     id: 3,
     name: "FREE FIRE",
-    shortName: "FF",
+    image: "https://i.ibb.co.com/HTV74MVB/Free-Fire.png",
     description:
       "Get ready for the Free Fire segment of JnU Esports Carnival 2026.",
     category: "Mobile",
     mode: "Squad",
     status: "Coming Soon",
-    entryFee: "TBA",
+    entryFee: "৳ 0 / JnU Campus Student",
     formLink: "#",
   },
 
   {
     id: 4,
     name: "FIFA",
-    shortName: "FIFA",
+    image: "https://i.ibb.co.com/pjFRfNj0/FIFA-Console.png",
     description:
       "Compete in the FIFA Console segment and battle your way to the top as a solo player.",
     category: "Console",
@@ -67,7 +68,7 @@ const esportsGames = [
   {
     id: 5,
     name: "ONLINE CHESS",
-    shortName: "CHESS",
+    image: "https://i.ibb.co.com/v6jmQTz8/Chess-Set.jpg",
     description:
       "Compete in the JnU E-Sports Carnival 2026 Chess Championship and battle your way to the top.",
     category: "Online",
@@ -81,7 +82,7 @@ const esportsGames = [
   {
     id: 6,
     name: "MOBILE LEGENDS",
-    shortName: "MLBB",
+    image: "https://i.ibb.co.com/whryxw32/Mobile-Legends.png",
     description:
       "Compete in the Mobile Legends: Bang Bang 5v5 university tournament at JnU Esports Carnival 2026.",
     category: "Mobile",
@@ -95,7 +96,7 @@ const esportsGames = [
   {
     id: 7,
     name: "EFOOTBALL",
-    shortName: "EFOOT",
+    image: "https://i.ibb.co.com/XZ3ZrdT6/E-Football.png",
     description:
       "Compete as a solo player in the eFootball segment of JnU E-Sports Carnival 2026.",
     category: "Mobile",
@@ -109,7 +110,7 @@ const esportsGames = [
   {
     id: 8,
     name: "CLASH ROYALE",
-    shortName: "CR",
+    image: "https://i.ibb.co.com/b55cfLVK/Clash-Royale.png",
     description:
       "Compete in the Clash Royale Championship of JnU E-Sports Carnival 2026.",
     category: "Mobile",
@@ -123,7 +124,7 @@ const esportsGames = [
   {
     id: 9,
     name: "RUBIK'S CUBE",
-    shortName: "CUBE",
+    image: "https://i.ibb.co.com/9mRzt2nD/Rubiks-Cube.png",
     description:
       "Register for the University Speedcubing Championship and compete to solve the cube with speed and accuracy.",
     category: "Offline",
@@ -134,6 +135,7 @@ const esportsGames = [
       "https://docs.google.com/forms/d/e/1FAIpQLSfJQGSPuupd10M8rqjNoCUYlXGkJiNVqeQlFUdFzAtwFfI-4g/viewform?usp=dialog",
   },
 ];
+
 export default function Esports() {
   return (
     <div className="relative min-h-screen">
